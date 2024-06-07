@@ -11,8 +11,23 @@ namespace DOTNET
     {
         static void Main(string[] args)
         {
+            M1.message1("computer-----1");
+            M1.message1("computer-----2");
+            M1.message1("computer-----3");
+            M1.message1("computer-----4",32);
+            M1.power(4);
+            Array1.arr1();
+            Console.WriteLine("{0} {1}", byte.MinValue, byte.MaxValue);
+            Console.WriteLine("{0} {1}", int.MinValue, int.MaxValue);
             Console.WriteLine("KE54658578JM");
+            string nm = "sdjasdmsdg";
+            Console.WriteLine(nm.ToLower());
+            Console.WriteLine(nm.Contains("sdm"));
             Class1.p();
+            Class2.overflow();
+            Class3.operatprs();
+            Class4.userdata();
+            
         }
     }
 }
