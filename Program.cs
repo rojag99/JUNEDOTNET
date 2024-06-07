@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace DOTNET
 {
     internal class Program
@@ -11,6 +12,7 @@ namespace DOTNET
         static void Main(string[] args)
         {
             Console.WriteLine("KE54658578JM");
+            Class1.p();
         }
     }
 }
