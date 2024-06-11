@@ -1,5 +1,5 @@
 
-namespace Project1
+namespace WebApplication1
 {
     public class Program
     {
