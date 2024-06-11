@@ -9,8 +9,14 @@ namespace DOTNET
 {
     internal class Program
     {
+        private static object ic;
+
         static void Main(string[] args)
         {
+            
+            Instancecheck instancecheck = new Instancecheck();
+            ClassIV c5 = new ClassIV();
+            instancecheck.in1();
             M1.message1("computer-----1");
             M1.message1("computer-----2");
             M1.message1("computer-----3");
@@ -27,7 +33,18 @@ namespace DOTNET
             Class2.overflow();
             Class3.operatprs();
             Class4.userdata();
+
             
         }
     }
+    internal class Instancecheck
+    {
+        
+        public  void in1()
+        {
+            Console.WriteLine("FROM INSTANCE");
+
+        }
+    }
+
 }
