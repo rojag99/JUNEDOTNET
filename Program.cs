@@ -17,6 +17,7 @@ namespace DOTNET
             Instancecheck instancecheck = new Instancecheck();
             ClassIV c5 = new ClassIV();
             instancecheck.in1();
+            M1.message1("roja");
             M1.message1("computer-----1");
             M1.message1("computer-----2");
             M1.message1("computer-----3");
