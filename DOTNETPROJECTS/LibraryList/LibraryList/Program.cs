@@ -1,5 +1,11 @@
+using LibraryList.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-namespace StudentData
+namespace LibraryList
 {
     public class Program
     {
@@ -7,9 +13,13 @@ namespace StudentData
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Register DbContext
+            builder.Services.AddDbContext<LandbDbContextClass>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("connectstr")));
 
+            // Add services to the container.
             builder.Services.AddControllers();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -24,9 +34,7 @@ namespace StudentData
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
 
             app.MapControllers();
 
