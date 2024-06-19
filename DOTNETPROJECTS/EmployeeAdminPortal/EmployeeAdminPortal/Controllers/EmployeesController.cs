@@ -3,6 +3,9 @@ using EmployeeAdminPortal.Models;
 using EmployeeAdminPortal.Models.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Sieve.Models;
+using Sieve.Services;
 
 namespace EmployeeAdminPortal.Controllers
 {
@@ -11,20 +14,30 @@ namespace EmployeeAdminPortal.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly ApplicationDbContext dbContext;
+        private readonly SieveProcessor sieveProcessor;
 
-        public EmployeesController(ApplicationDbContext dbContext)
+        public EmployeesController(ApplicationDbContext dbContext, SieveProcessor sieveProcessor)
         {
             this.dbContext = dbContext;
+            this.sieveProcessor = sieveProcessor;
         
         }
-
+        [Route("getal")]
         [HttpGet]
-        public IActionResult GetAllEmployee()
+        public async Task<IActionResult> getal([FromQuery] SieveModel model)
         {
-           var allEmployees = dbContext.Employees.ToList();
-            return Ok(allEmployees);
-            //return Ok(dbContext.Employees.ToList());
+            var allemplo = dbContext.Employees.AsQueryable();
+            allemplo = sieveProcessor.Apply(model, allemplo);
+            return Ok(allemplo);
         }
+
+        
+
+
+        //return Ok(dbContext.Employees.ToList());
+        //}
+
+
         [HttpPost]
         public IActionResult AddEmployee(AddEmployeeDto addEmployeeDto)
         {
@@ -81,8 +94,5 @@ namespace EmployeeAdminPortal.Controllers
             return Ok();
         }
 
-        //{
-
-        //}
     }
 }

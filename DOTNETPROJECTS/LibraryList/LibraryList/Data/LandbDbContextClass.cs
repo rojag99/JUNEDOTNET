@@ -12,7 +12,6 @@ namespace LibraryList.Data
 
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -25,17 +24,14 @@ namespace LibraryList.Data
                 .IsRequired();
 
             modelBuilder.Entity<Book>()
-                .HasOne(b => b.Author)
-                .WithMany(a => a.Books)
-                .HasForeignKey(b => b.AuthorId)
-                .IsRequired();
+                .HasOne(b => b.Author)                    // Each book has one author
+                .WithMany(a => a.Books)                   // Each author can have many books
+                .HasForeignKey(b => b.AuthorId)          // Foreign key in Book entity
+                .IsRequired();                            // AuthorId is required for each book
 
             modelBuilder.Entity<Author>()
-                .HasKey(a => a.AuthorId);
-
-            modelBuilder.Entity<Author>()
-                .Property(a => a.Name)
-                .IsRequired();
+                .HasKey(a => a.AuthorId);                 // Primary key for Author entity
         }
+
     }
 }
