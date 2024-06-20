@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace EmployeeAdminPortal.Controllers.v2
+namespace EmployeeAdminPortal.Controllers
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
-    [ApiVersion("2.0")]
+    [ApiVersion("1.0", Deprecated =true)]
     
     public class WeatherForecastController : ControllerBase
     {
@@ -27,7 +27,7 @@ namespace EmployeeAdminPortal.Controllers.v2
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = "from version 2 changed api version"
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
         }
