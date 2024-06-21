@@ -24,20 +24,25 @@ namespace EmployeeAdminPortal.Controllers
         }
         [Route("getal")]
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public async Task<IActionResult> getal([FromQuery] SieveModel model)
         {
+            if (dbContext.Employees == null)
+            {
+                return NotFound($"The employeed data is not found");
+           
+            }
             var allemplo = dbContext.Employees.AsQueryable();
+            //AsQueryable() ensures that the result can be further queried using LINQ.
+            //dbContext.Employees.AsQueryable(): This line retrieves all employees from the database using dbContext, which is typically an instance of the database context in Entity Framework. 
             allemplo = sieveProcessor.Apply(model, allemplo);
-            return Ok(allemplo);
+            //sieveProcessor seems to be an object responsible for applying some filtering or processing logic to the allemplo (employees) query. 
+            return Ok(allemplo); //return Ok(allemplo): Returns the modified query as the HTTP response.
+
         }
-
-        
-
-
         //return Ok(dbContext.Employees.ToList());
-        //}
-
-
         [HttpPost]
         public IActionResult AddEmployee(AddEmployeeDto addEmployeeDto)
         {
